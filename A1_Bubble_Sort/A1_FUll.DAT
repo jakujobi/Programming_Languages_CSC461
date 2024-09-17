@@ -30,6 +30,39 @@
 +7002005004   //    1006   _________       <+jump     i++ if i(002) < N(005) jump to FILL_A(1004)
 
 //  3. Out Loop
++0000000002   //    1007   Set_i_0         Move       Move 0(000) into i(002), i = 0
++0000000003   //    1008   OUT_LOOP        Move       Move 0(000) into j(003), j = 0
++1001003010   //    1009   IN_LOOP         Add        Add j(003) + 1(001) into (j+1)(010), Make j+1
++6014003011   //    1010   _________       Load       Load jth(003) item from A(014) into A_j
++6014010012   //    1011   _________       Load       Load (j+1)th(010) item from A(014) into A_j+1
++5011012015   //    1012   _________       ≥ jump     If A_j(011) ≥ A_j+1(012), jump to SWAP(1015)
++7003006009   //    1013   INCRE_J         +<jump     j++, If j(003) < N-1(006), jump to IN_LOOP(1009)
++1002001002   //    1014   _________       Add        Add i(002) + 1(001) into i(002), i++
+
++0011000004   //    1015   SWAP            Move       Put A_j(011) into t (004), t = A_j
++0012000011   //    1016   _________       Move       Put A_j+1(012) into A_j(011), A_j+1
++0004000012   //    1017   _________       Move       Put t(004) into A_j+1(012), A_j+1 = t
++4000000013   //    1018   _________       <> jump    Jump back to INCRE_J(1013) if 0(000) == 0(000), Always jump
++7002006008   //    1019   _________       +<jump     i++, if i(002) < N-1(006), jump to OUT_LOOP(1008)
+
+//  4. Print Sorted
++0000000002   //    1020   P_SORTED        Move       Move 0(000) into i(002), i = 0
++6014002009   //    1021   PRINT_LIST      Load       Load i(002) item from A(014) into TEMP(009), Temp = A[i]
+-8009000000   //    1022   _________       Print      Print TEMP(009)
++7002005021   //    1023   _________       +<jump     i++, if i(002) < N(005), jump to PRINT_LIST(1021)
+
+//  5. Filter 50-150
++0000000002   //    1024   FIL_50_150      Move     
++0008001013   //    1025   _________       Add        Add 150(008) + 1(001) into 151(013), Make 151
++6014002009   //    1026   CHECK_50        Load       Load A[i] into TEMP(009), Temp = A[i]
+-5009007029   //    1027   __TEMP≥50       ≥ jump     If TEMP(009) ≥ 50(007), jump to CHECK_150(1029)
++7002005026   //    1028   _________       +<jump     i++, if i(002) < N(005), jump to CHECK_50(1026)
+
+-5002013031   //    1029   CHECK_150       < jump     If TEMP(009) < 151, jump to PRINT_RANGE(1031)
++7002005026   //    1030   _________       +<jump     i++, if i(002) < N(005), jump to CHECK_50(1026)
+
+-8009000000   //    1031   PRINT_RANGE     Print      Print TEMP(009)
++7002005026   //    1032   _________       +<jump     i++, if i(002) < N(005), jump to CHECK_50(1026)
 
 +9000000000   //    1033   TERMINATE       End        TERMINATE Program
 +9999999999
