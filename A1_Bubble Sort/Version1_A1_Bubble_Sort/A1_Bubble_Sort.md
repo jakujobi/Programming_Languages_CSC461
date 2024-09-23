@@ -195,7 +195,17 @@ Read Values into Array A
 Prep i and j to 0 for sorting
 
 /table
-
++0000000010
++0000000094
++0000000150
++0000000113
++0000000037
++0000000063
++0000000160
++0000000128
++0000000235
++0000000117
++0000000001
 ### Code Are
 
 | Address | Value       | Label                  | Comment                                               |
