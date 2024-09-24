@@ -34,6 +34,12 @@
 +6222005004
 -8004000000
 +7005002019
++0000000005
++6222005004
+-5004009027
++5004010027
+-8004000000
++7005002023
 +9000000000
 +9999999999
 +0000000010
@@ -47,3 +53,14 @@
 +0000000235
 +0000000117
 +0000000001
+
+//Author: John Akujobi
+//Date: 2024-09-22
+//Programming Languages CSC461
+//Assignment 1
+//Version 2
+//Bubble Sort
+//cards.txt
+//This program reads a file of cards and sorts them using bubble sort
+//Then it prints the sorted cards to the screen
+//It also prints the numbers between 50 and 150 in the file
