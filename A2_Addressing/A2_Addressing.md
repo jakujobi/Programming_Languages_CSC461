@@ -197,3 +197,4 @@ Here is an example related to operator precedence:
 - If a language has both addition (+) and multiplication ( * ). Which one should have the higher precedence, or should they have the same?
 	- Usually, multiplication has higher precedence. This means `a + b * c` should be interpreted as `a + (b*c)`
 - If the grammar doesn't encode the precedence properly, we could end up making a parse tree where addition is done before multiplication. This will lead to incorrect results.
+#CSC_461_Programming_Languages
