@@ -217,6 +217,10 @@
     (t
      (addAll (cdr lst)))))
 
+; print empty new line
+(print "")
+(print (addAll C))
+
 
 
 (divider)
