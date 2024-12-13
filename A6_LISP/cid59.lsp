@@ -71,7 +71,16 @@
 ;********************************
 
 
+(defun addAll (lst)
+  (cond
+    ((null lst) 0)
+    ((numberp lst) lst)
+    (t
+     (+ (addAll (car lst)) (addAll (cdr lst))))))
 
+; print empty new line
+(print "")
+(print (addAll C))
 
 
 
