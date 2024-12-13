@@ -3,13 +3,6 @@
 (print " John Akujobi  ")
 (print "************************")
 
-(defvar A nil)  ; Declare A
-(defvar B nil)  ; Declare B
-(defvar C nil)  ; Declare C
-(defvar D nil)  ; Declare D
-(defvar Empl nil)  ; Declare Empl
-
-
 ; DO NOT  use higher level list funtions !!
 ; DO NOT use helper funtions (1 funtion solutions)
 ; 
@@ -23,30 +16,9 @@
 ;******************
 
 
-
-;;!=========================================================================================================================================================
-;;******  title lines ***************
-;;!=========================================================================================================================================================
-; This prints the name of the function being run in the middle of a line of = signs at bothe sides
-; it does so by rpeating the = sign 40 times and then adding the name of the function in the middle
-;********************************
-(defun title (name)
-  "Prints a title with the name centered between lines of '=' signs, with empty lines for separation."
-  (format t "~%~%") ; Two empty lines
-  (format t "~A ~A ~A~%"
-          (make-string 20 :initial-element #\=) ; Left side '=' signs
-          name                                  ; Function name
-          (make-string 20 :initial-element #\=)) ; Right side '=' signs
-  (format t "~%")) ; Another empty line after the title
-
-
-
 ;;!=========================================================================================================================================================
 ;;****** lookupempl ***************
 ;;!=========================================================================================================================================================
-
-(title "lookupempl")
-
 ;********************************
 ;****** lookupempl ***************
 ; returns values related to the Key value of an
@@ -93,8 +65,11 @@
 ;;!=========================================================================================================================================================
 ;;****** Doubleodd ***************
 ;;!=========================================================================================================================================================
-
-(title "Doubleodd")
+;****** Doubleodd ***************
+; Doubleodd: return a list where all the odd numbers have been doubled.
+; Example: (doubleodd B) --> (2 2 6 4 10)
+; Assume single level list
+;********************************
 
 (defun doubleOdd (lst)
     "Return a single-level list where all odd integers in LST are doubled."
@@ -135,9 +110,6 @@
 ;;!==========================================================================================================================================================
 ;;****** addAll ***************
 ;;!==========================================================================================================================================================
-
-(title "addAll")
-
 ;****** addAll ******************
 ; addall: returns the sum of nested list of positive integers
 ; Example: (addAll C) --> 15
@@ -184,9 +156,6 @@
 ;;!==========================================================================================================================================================
 ;;****** large_atom ***************
 ;;!==========================================================================================================================================================
-
-(title "large_atom")
-
 ;----- OPTIONAL (do not have to do) ------------------
 ;****** large_atom ***************
 ; large_atom : returns the largest value greater than 0
