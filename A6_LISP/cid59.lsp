@@ -102,8 +102,29 @@
 (print (lookupEmpl1 Empl 10))
 
 
+;*****************************************
+; lookupEmpl2:
+;   - Similar logic with more explicit cond branching
+;*****************************************
+
+(defun lookupEmpl2 (empl-list key)
+  "Look up an employee record by KEY in EMPL-LIST using multiple cond branches."
+  (cond
+    ((null empl-list)
+     'NOT-FOUND)
+
+    ;; If the key matches, return the record
+    ((eq (car (car empl-list)) key)
+     (car empl-list))
+
+    ;; Move on to the next record
+    (t
+     (lookupEmpl2 (cdr empl-list) key))))
 
 
+
+
+(divider)
 
 ;==========================================================================================================================================================
 ;****** Doubleodd ***************
@@ -125,9 +146,28 @@
 ; print empty new line
 (print "")
 (print (doubleodd B))
+
+
+(defun doubleOdd (lst)
+  "Return a single-level list where all odd integers in LST are doubled."
+  (cond
+    ;; Base case: empty list
+    ((null lst) nil)
+
+    ;; If the first element is an odd integer, double it
+    ((and (numberp (car lst))
+          (= (rem (car lst) 2) 1))
+     (cons (* 2 (car lst)) (doubleOdd (cdr lst))))
+
+    ;; Otherwise keep the element as is
+    (t
+     (cons (car lst) (doubleOdd (cdr lst))))))
+; print empty new line
+(print "")
+(print (doubleOdd B))
+
+
 (divider)
-
-
 
 
 
@@ -157,6 +197,9 @@
 (print (addAll C))
 
 
+
+
+(divider)
 
 ;==========================================================================================================================================================
 ;****** large_atom ***************
