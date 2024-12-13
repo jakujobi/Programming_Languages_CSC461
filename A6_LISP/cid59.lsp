@@ -3,6 +3,13 @@
 (print " John Akujobi  ")
 (print "************************")
 
+(defvar A nil)  ; Declare A
+(defvar B nil)  ; Declare B
+(defvar C nil)  ; Declare C
+(defvar D nil)  ; Declare D
+(defvar Empl nil)  ; Declare Empl
+
+
 ; DO NOT  use higher level list funtions !!
 ; DO NOT use helper funtions (1 funtion solutions)
 ; 
@@ -17,23 +24,6 @@
 
 
 
-;;!=========================================================================================================================================================`
-;;******  Divider Line ***************
-;;!=========================================================================================================================================================
-; This prints a line of = signs  and 2 empty lines after to separate the output and it is used to separate the output of different functions
-; it does so by rpeating the = sign 40 times
-;********************************
-(defun divider ()
-    (print
-        (make-string 40 :initial-element #\=)
-    )
-    (print "")
-    (print "")
-)
-
-(divider)
-
-
 ;;!=========================================================================================================================================================
 ;;******  title lines ***************
 ;;!=========================================================================================================================================================
@@ -41,15 +31,14 @@
 ; it does so by rpeating the = sign 40 times and then adding the name of the function in the middle
 ;********************************
 (defun title (name)
-    (print
-        (concatenate
-            'string (make-string 20 :initial-element #\=)
-            " " name " " 
-            (make-string 20 :initial-element #\=)
-        )
-    )
-    (print "")
-)
+  "Prints a title with the name centered between lines of '=' signs, with empty lines for separation."
+  (format t "~%~%") ; Two empty lines
+  (format t "~A ~A ~A~%"
+          (make-string 20 :initial-element #\=) ; Left side '=' signs
+          name                                  ; Function name
+          (make-string 20 :initial-element #\=)) ; Right side '=' signs
+  (format t "~%")) ; Another empty line after the title
+
 
 
 ;;!=========================================================================================================================================================
@@ -70,30 +59,7 @@
 ; Example:  (lookupempl Empl 10) --> (10 Mary Smith 36 12)
 ;********************************
 
-(defun lookupempl (empl-list key)
-    (cond
-        ((null empl-list)
-        'NOT-FOUND)
-        ((eq (car (car empl-list)) key)
-        (car empl-list))
-        (t
-            (lookupempl (cdr empl-list) key)
-        )
-    )
-)
-; print empty new line
-(print "")
-(print (lookupempl Empl 10))
-
-
-
-;*****************************************
-; lookupEmpl1: 
-;   - Recursively scans Empl list 
-;   - Returns record if found, else 'NOT-FOUND.
-;*****************************************
-
-(defun lookupEmpl1 (empl-list key)
+(defun lookupEmpl (empl-list key)
   "Look up an employee record by KEY in EMPL-LIST using basic recursion."
     (cond
         ;; If empl-list is empty, return 'NOT-FOUND
@@ -112,52 +78,17 @@
 
         ;; Otherwise, recurse down the list
         (t
-            (lookupEmpl1 (cdr empl-list) key
+            (lookupEmpl (cdr empl-list) key
             )
         )
     )
 )
-
-; print empty new line
-(print "")
-(print (lookupEmpl1 Empl 10))
-
-
-;*****************************************
-; lookupEmpl2:
-;   - Similar logic with more explicit cond branching
-;*****************************************
-
-(defun lookupEmpl2 (empl-list key)
-    "Look up an employee record by KEY in EMPL-LIST using multiple cond branches."
-    (cond
-        ((null empl-list)
-            'NOT-FOUND
-        )
-
-        ;; If the key matches, return the record
-        (
-            (eq
-                (car (car empl-list))
-                key
-            )
-            (car empl-list)
-        )
-
-        ;; Move on to the next record
-        (t
-            (lookupEmpl2
-                (cdr empl-list)
-                key
-            )
-        )
-    )
-)
+(print (lookupEmpl Empl 10))
 
 
 
 
-(divider)
+
 
 ;;!=========================================================================================================================================================
 ;;****** Doubleodd ***************
@@ -194,12 +125,10 @@
         )
     )
 )
-; print empty new line
-(print "")
 (print (doubleOdd B))
 
 
-(divider)
+
 
 
 
@@ -215,19 +144,6 @@
 ; Return 0 if the list is empty
 ; Assume that it may be a nested level list
 ;********************************
-
-
-;; (defun addAll (lst)
-;;   (cond
-;;     ((null lst) 0)
-;;     ((numberp lst) lst)
-;;     (t
-;;      (+ (addAll (car lst)) (addAll (cdr lst))))))
-
-;; ; print empty new line
-;; (print "")
-;; (print (addAll C))
-
 
 (defun addAll (lst)
   "Sum all positive integers in a nested list LST."
@@ -260,14 +176,10 @@
         )
     )
 )
-
-; print empty new line
-(print "")
 (print (addAll C))
 
 
 
-(divider)
 
 ;;!==========================================================================================================================================================
 ;;****** large_atom ***************
@@ -287,17 +199,17 @@
 ; THIS SHOULD BE THE HARDER ONE :)
 ;*********************************
 
-(defun large_atom1 (L)
-    "Return the largest positive integer in the nested list L using a simple recursive approach."
+(defun large_atom (L)
+    "Return the largest positive integer in the nested list L using a recursive approach."
     (cond
         ;; Base case: if the list is empty, return 0
         ((null L)
         0)
 
-        ;; If the car of the list is itself a list, recursively call large_atom1 on that list
+        ;; If the car of the list is itself a list, recursively call large_atom on that list
         ((listp (car L))
-            (let ((submax (large_atom1 (car L)))          ; largest in the sublist
-                    (restmax (large_atom1 (cdr L)))
+            (let ((submax (large_atom (car L)))          ; largest in the sublist
+                    (restmax (large_atom (cdr L)))
                 )        ; largest in the rest
                 (cond 
                     ((> submax restmax) submax)
@@ -307,8 +219,17 @@
         )
 
         ;; If the car of the list is an atom and it's a positive integer:
-        ((and (numberp (car L)) (> (car L) 0))
-            (let ((restmax (large_atom1 (cdr L))))        ; largest in the rest of the list
+        (
+            (and
+                (numberp (car L))
+                (> (car L) 0)
+            )
+            (let 
+                (
+                    (restmax
+                        (large_atom (cdr L))
+                    )
+                )        ; largest in the rest of the list
                 (if (> (car L) restmax)
                     (car L)
                     restmax
@@ -318,55 +239,8 @@
 
         ;; Otherwise, skip the car and move on
         (t
-            (large_atom1 (cdr L))
+            (large_atom (cdr L))
         )
     )
 )
-
-; print empty new line
-(print "")
-(print (large_atom1 D))
-
-
-
-(defun large_atom2 (L)
-    "Return the largest positive integer in the nested list L using a tail-recursive helper."
-    (labels
-        (
-            (helper (lst current-max)
-                (cond
-                    ;; If list is empty, return current-max
-                    ((null lst)
-                        current-max)    
-
-                    ;; If car is a sub-list, recursively process sub-list, then the rest
-                    ((listp (car lst))
-                        (helper (cdr lst) (helper (car lst) current-max)))
-
-                    ;; If car is a positive integer, update current-max if needed
-                    (
-                        (and
-                            (numberp (car lst))
-                            (> (car lst) 0)
-                        )
-                        (if (> (car lst) current-max)
-                            (helper (cdr lst) (car lst))
-                            (helper (cdr lst) current-max)
-                        )
-                    )
-
-                    ;; Otherwise, skip this element
-                    (t
-                        (helper (cdr lst) current-max)
-                    )
-                )
-            )
-        )
-        ;; Start recursion with an accumulator of 0
-        (helper L 0)
-    )
-)
-
-; print empty new line
-(print "")
-(print (large_atom2 D))
+(print (large_atom D))
