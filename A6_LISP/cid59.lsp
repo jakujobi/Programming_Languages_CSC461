@@ -108,18 +108,22 @@
 ;*****************************************
 
 (defun lookupEmpl2 (empl-list key)
-  "Look up an employee record by KEY in EMPL-LIST using multiple cond branches."
-  (cond
-    ((null empl-list)
-     'NOT-FOUND)
+    "Look up an employee record by KEY in EMPL-LIST using multiple cond branches."
+    (cond
+        (
+            (null empl-list)
+            'NOT-FOUND
+        )
 
-    ;; If the key matches, return the record
-    ((eq (car (car empl-list)) key)
-     (car empl-list))
+        ;; If the key matches, return the record
+        ((eq (car (car empl-list)) key)
+        (car empl-list))
 
-    ;; Move on to the next record
-    (t
-     (lookupEmpl2 (cdr empl-list) key))))
+        ;; Move on to the next record
+        (t
+        (lookupEmpl2 (cdr empl-list) key))
+    )
+)
 
 
 
@@ -149,19 +153,34 @@
 
 
 (defun doubleOdd (lst)
-  "Return a single-level list where all odd integers in LST are doubled."
-  (cond
-    ;; Base case: empty list
-    ((null lst) nil)
+    "Return a single-level list where all odd integers in LST are doubled."
+    (cond
+        ;; Base case: empty list
+        ((null lst) nil)
 
-    ;; If the first element is an odd integer, double it
-    ((and (numberp (car lst))
-          (= (rem (car lst) 2) 1))
-     (cons (* 2 (car lst)) (doubleOdd (cdr lst))))
+        ;; If the first element is an odd integer, double it
+        (
+            (and
+                (numberp (car lst))
+                (= 
+                    (rem (car lst) 2) 1
+                )
+            )
+            (cons
+                (* 2 (car lst))
+                (doubleOdd (cdr lst))
+            )
+        )
 
-    ;; Otherwise keep the element as is
-    (t
-     (cons (car lst) (doubleOdd (cdr lst))))))
+        ;; Otherwise keep the element as is
+        (t
+            (cons
+                (car lst)
+                (doubleOdd (cdr lst))
+            )
+        )
+    )
+)
 ; print empty new line
 (print "")
 (print (doubleOdd B))
@@ -199,23 +218,35 @@
 
 (defun addAll (lst)
   "Sum all positive integers in a nested list LST."
-  (cond
-    ;; Base case: empty list
-    ((null lst) 0)
+    (cond
+        ;; Base case: empty list
+        ((null lst) 0)
 
-    ;; If the car is itself a nested list, recurse inside it and add to the rest
-    ((listp (car lst))
-     (+ (addAll (car lst))
-        (addAll (cdr lst))))
+        ;; If the car is itself a nested list, recurse inside it and add to the rest
+        (
+            (listp (car lst))
+            (+ 
+                (addAll (car lst))
+                (addAll (cdr lst))
+            )
+        )
 
-    ;; If the car is an atom, check if it's a positive integer
-    ((and (numberp (car lst))
-          (> (car lst) 0))
-     (+ (car lst) (addAll (cdr lst))))
+        ;; If the car is an atom, check if it's a positive integer
+        (
+            (and (numberp (car lst))
+                (> (car lst) 0)
+            )
+            (+
+                (car lst) (addAll (cdr lst))
+            )
+        )
 
-    ;; Otherwise, skip it and move on
-    (t
-     (addAll (cdr lst)))))
+        ;; Otherwise, skip it and move on
+        (t
+            (addAll (cdr lst))
+        )
+    )
+)
 
 ; print empty new line
 (print "")
@@ -243,6 +274,41 @@
 ; THIS SHOULD BE THE HARDER ONE :)
 ;*********************************
 
+(defun large_atom1 (L)
+    "Return the largest positive integer in the nested list L using a simple recursive approach."
+    (cond
+        ;; Base case: if the list is empty, return 0
+        ((null L)
+        0)
+
+        ;; If the car of the list is itself a list, recursively call large_atom1 on that list
+        ((listp (car L))
+            (let ((submax (large_atom1 (car L)))          ; largest in the sublist
+                    (restmax (large_atom1 (cdr L)))
+                )        ; largest in the rest
+                (cond 
+                    ((> submax restmax) submax)
+                    (t restmax)
+                )
+            )
+        )
+
+        ;; If the car of the list is an atom and it's a positive integer:
+        ((and (numberp (car L)) (> (car L) 0))
+            (let ((restmax (large_atom1 (cdr L))))        ; largest in the rest of the list
+                (if (> (car L) restmax)
+                    (car L)
+                    restmax
+                )
+            )
+        )
+
+        ;; Otherwise, skip the car and move on
+        (t
+            (large_atom1 (cdr L))
+        )
+    )
+)
 
 
 
