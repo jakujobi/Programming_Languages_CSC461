@@ -3,6 +3,13 @@
 (print " John Akujobi  ")
 (print "************************")
 
+
+
+;;!=========================================================================================================================================================
+;;******  Declaring my variables ***************
+;;!=========================================================================================================================================================
+;; Declared variables
+;; Because the compiler was throwing a warning about undeclared variables
 (defvar A nil)  ; Declare A
 (defvar B nil)  ; Declare B
 (defvar C nil)  ; Declare C
@@ -15,11 +22,49 @@
 ; 
 ;
 ; TEST CASE LISTS 
-(setq A `((1 2)  3 ( 2 3 (1 9))))
-(setq B `(1 2 3 4 5))
-(setq C `((1 2) ((3)) 4 (5)))
-(setq D `(1 2 (6 3) 4 5))
-(setq Empl '( (10 Mary Smith 36 12) (5 Bob Olsen 33 12) (130 Lace Smith 44 16)))
+
+;; A
+;; I'm not sure which funtion it is suppossed to test
+(setq A 
+    `(
+        (1 2)
+        3
+        ( 2 3 (1 9))
+    )
+)
+
+;; B
+;; For the funtion doubleOdd
+(setq B
+    `(1 2 3 4 5)
+)
+
+;; C
+;; For the funtion addAll
+(setq C
+    `(
+        (1 2)
+        ((3))
+        4
+        (5)
+    )
+)
+
+;; D
+;; For the funtion large_atom
+(setq D
+    `(1 2 (6 3) 4 5)
+)
+
+;; Empl
+;; For the funtion lookupEmpl
+(setq Empl
+    '(
+        (10 Mary Smith 36 12)
+        (5 Bob Olsen 33 12)
+        (130 Lace Smith 44 16)
+    )
+)
 ;******************
 
 
@@ -93,9 +138,13 @@
 ;;!=========================================================================================================================================================
 ;;****** Doubleodd ***************
 ;;!=========================================================================================================================================================
-
 (title "Doubleodd")
 
+;****** Doubleodd ***************
+; Doubleodd: return a list where all the odd numbers have been doubled.
+; Example: (doubleodd B) --> (2 2 6 4 10)
+; Assume single level list
+;********************************
 (defun doubleOdd (lst)
     "Return a single-level list where all odd integers in LST are doubled."
     (cond
@@ -244,3 +293,4 @@
     )
 )
 (print (large_atom D))
+(print (large_atom A))
