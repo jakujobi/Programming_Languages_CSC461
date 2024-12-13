@@ -41,7 +41,13 @@
 ; it does so by rpeating the = sign 40 times and then adding the name of the function in the middle
 ;********************************
 (defun title (name)
-    (print (concatenate 'string (make-string 20 :initial-element #\=) " " name " " (make-string 20 :initial-element #\=)))
+    (print
+        (concatenate
+            'string (make-string 20 :initial-element #\=)
+            " " name " " 
+            (make-string 20 :initial-element #\=)
+        )
+    )
     (print "")
 )
 
@@ -317,14 +323,50 @@
     )
 )
 
+; print empty new line
+(print "")
+(print (large_atom1 D))
 
 
 
+(defun large_atom2 (L)
+    "Return the largest positive integer in the nested list L using a tail-recursive helper."
+    (labels
+        (
+            (helper (lst current-max)
+                (cond
+                    ;; If list is empty, return current-max
+                    ((null lst)
+                        current-max)    
 
+                    ;; If car is a sub-list, recursively process sub-list, then the rest
+                    ((listp (car lst))
+                        (helper (cdr lst) (helper (car lst) current-max)))
 
+                    ;; If car is a positive integer, update current-max if needed
+                    (
+                        (and
+                            (numberp (car lst))
+                            (> (car lst) 0)
+                        )
+                        (if (> (car lst) current-max)
+                            (helper (cdr lst) (car lst))
+                            (helper (cdr lst) current-max)
+                        )
+                    )
 
+                    ;; Otherwise, skip this element
+                    (t
+                        (helper (cdr lst) current-max)
+                    )
+                )
+            )
+        )
+        ;; Start recursion with an accumulator of 0
+        (helper L 0)
+    )
+)
 
-
-
-
-
+; print empty new line
+(print "")
+(print (large_atom2 D))
