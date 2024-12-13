@@ -137,15 +137,15 @@
 ; Example: (doubleodd B) --> (2 2 6 4 10)
 ; Assume single level list
 ;********************************
-(defun doubleodd (lst)
-  (mapcar (lambda (x)
-            (if (oddp x)
-                (* x 2)
-                x))
-          lst))
-; print empty new line
-(print "")
-(print (doubleodd B))
+;; (defun doubleodd (lst)
+;;   (mapcar (lambda (x)
+;;             (if (oddp x)
+;;                 (* x 2)
+;;                 x))
+;;           lst))
+;; ; print empty new line
+;; (print "")
+;; (print (doubleodd B))
 
 
 (defun doubleOdd (lst)
@@ -185,17 +185,37 @@
 ;********************************
 
 
+;; (defun addAll (lst)
+;;   (cond
+;;     ((null lst) 0)
+;;     ((numberp lst) lst)
+;;     (t
+;;      (+ (addAll (car lst)) (addAll (cdr lst))))))
+
+;; ; print empty new line
+;; (print "")
+;; (print (addAll C))
+
+
 (defun addAll (lst)
+  "Sum all positive integers in a nested list LST."
   (cond
+    ;; Base case: empty list
     ((null lst) 0)
-    ((numberp lst) lst)
+
+    ;; If the car is itself a nested list, recurse inside it and add to the rest
+    ((listp (car lst))
+     (+ (addAll (car lst))
+        (addAll (cdr lst))))
+
+    ;; If the car is an atom, check if it's a positive integer
+    ((and (numberp (car lst))
+          (> (car lst) 0))
+     (+ (car lst) (addAll (cdr lst))))
+
+    ;; Otherwise, skip it and move on
     (t
-     (+ (addAll (car lst)) (addAll (cdr lst))))))
-
-; print empty new line
-(print "")
-(print (addAll C))
-
+     (addAll (cdr lst)))))
 
 
 
