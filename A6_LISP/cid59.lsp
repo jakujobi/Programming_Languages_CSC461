@@ -24,10 +24,12 @@
 ; it does so by rpeating the = sign 40 times
 ;********************************
 (defun divider ()
-  (print (make-string 40 :initial-element #\=))
-  (print "")
-  (print "")
-  )
+    (print
+        (make-string 40 :initial-element #\=)
+    )
+    (print "")
+    (print "")
+)
 
 (divider)
 
@@ -39,9 +41,9 @@
 ; it does so by rpeating the = sign 40 times and then adding the name of the function in the middle
 ;********************************
 (defun title (name)
-  (print (concatenate 'string (make-string 20 :initial-element #\=) " " name " " (make-string 20 :initial-element #\=)))
-  (print "")
-  )
+    (print (concatenate 'string (make-string 20 :initial-element #\=) " " name " " (make-string 20 :initial-element #\=)))
+    (print "")
+)
 
 
 ;==========================================================================================================================================================
@@ -63,13 +65,16 @@
 ;********************************
 
 (defun lookupempl (empl-list key)
-  (cond
-    ((null empl-list)
-     'NOT-FOUND)
-    ((eq (car (car empl-list)) key)
-     (car empl-list))
-    (t
-     (lookupempl (cdr empl-list) key))))
+    (cond
+        ((null empl-list)
+        'NOT-FOUND)
+        ((eq (car (car empl-list)) key)
+        (car empl-list))
+        (t
+            (lookupempl (cdr empl-list) key)
+        )
+    )
+)
 ; print empty new line
 (print "")
 (print (lookupempl Empl 10))
@@ -84,18 +89,28 @@
 
 (defun lookupEmpl1 (empl-list key)
   "Look up an employee record by KEY in EMPL-LIST using basic recursion."
-  (cond
-    ;; If empl-list is empty, return 'NOT-FOUND
-    ((null empl-list)
-     'NOT-FOUND)
+    (cond
+        ;; If empl-list is empty, return 'NOT-FOUND
+        ((null empl-list)
+            'NOT-FOUND
+        )
 
-    ;; Compare the car of the first record to KEY
-    ((eq (car (car empl-list)) key)
-     (car empl-list))
+        ;; Compare the car of the first record to KEY
+        (
+            (eq
+                (car (car empl-list))
+                key
+            )
+            (car empl-list)
+        )
 
-    ;; Otherwise, recurse down the list
-    (t
-     (lookupEmpl1 (cdr empl-list) key))))
+        ;; Otherwise, recurse down the list
+        (t
+            (lookupEmpl1 (cdr empl-list) key
+            )
+        )
+    )
+)
 
 ; print empty new line
 (print "")
@@ -110,18 +125,26 @@
 (defun lookupEmpl2 (empl-list key)
     "Look up an employee record by KEY in EMPL-LIST using multiple cond branches."
     (cond
-        (
-            (null empl-list)
+        ((null empl-list)
             'NOT-FOUND
         )
 
         ;; If the key matches, return the record
-        ((eq (car (car empl-list)) key)
-        (car empl-list))
+        (
+            (eq
+                (car (car empl-list))
+                key
+            )
+            (car empl-list)
+        )
 
         ;; Move on to the next record
         (t
-        (lookupEmpl2 (cdr empl-list) key))
+            (lookupEmpl2
+                (cdr empl-list)
+                key
+            )
+        )
     )
 )
 
@@ -135,22 +158,6 @@
 ;==========================================================================================================================================================
 
 (title "Doubleodd")
-
-;****** Doubleodd ***************
-; Doubleodd: return a list where all the odd numbers have been doubled.
-; Example: (doubleodd B) --> (2 2 6 4 10)
-; Assume single level list
-;********************************
-;; (defun doubleodd (lst)
-;;   (mapcar (lambda (x)
-;;             (if (oddp x)
-;;                 (* x 2)
-;;                 x))
-;;           lst))
-;; ; print empty new line
-;; (print "")
-;; (print (doubleodd B))
-
 
 (defun doubleOdd (lst)
     "Return a single-level list where all odd integers in LST are doubled."
